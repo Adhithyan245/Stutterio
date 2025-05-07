@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stammering Assessment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #3494e6, #ec6ead);
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .question {
+      margin-bottom: 15px;
+      display: none;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result-message {
+      margin-top: 20px;
+      font-weight: bold;
+      display: none;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Stammering Assessment</h1>
+
+  <form id="assessmentForm">
+    <div class="question">
+      <p>1. Do you experience difficulties in speaking fluently?</p>
+      <input type="radio" name="q1" value="yes"> Yes<br>
+      <input type="radio" name="q1" value="no"> No<br>
+    </div>
+    <!-- Add more questions -->
+    <div class="question">
+      <p>2. Do you hesitate before speaking?</p>
+      <input type="radio" name="q2" value="yes"> Yes<br>
+      <input type="radio" name="q2" value="no"> No<br>
+    </div>
+    <!-- Add more questions -->
+    <div class="question">
+      <p>3. Do you struggle with specific sounds or letters?</p>
+      <input type="radio" name="q3" value="yes"> Yes<br>
+      <input type="radio" name="q3" value="no"> No<br>
+    </div>
+    <!-- Add more questions -->
+    <div class="question">
+      <p>4. Do you find it hard to communicate when nervous?</p>
+      <input type="radio" name="q4" value="yes"> Yes<br>
+      <input type="radio" name="q4" value="no"> No<br>
+    </div>
+    <!-- Add more questions -->
+    <div class="question">
+      <p>5. Do you repeat words or phrases unintentionally?</p>
+      <input type="radio" name="q5" value="yes"> Yes<br>
+      <input type="radio" name="q5" value="no"> No<br>
+    </div>
+    <!-- Add more questions -->
+    <div class="question">
+      <p>6. Do you feel self-conscious about your speech?</p>
+      <input type="radio" name="q6" value="yes"> Yes<br>
+      <input type="radio" name="q6" value="no"> No<br>
+    </div>
+    <!-- Add more questions -->
+    <div class="question">
+      <p>7. Do you avoid speaking situations due to fear of stammering?</p>
+      <input type="radio" name="q7" value="yes"> Yes<br>
+      <input type="radio" name="q7" value="no"> No<br>
+    </div>
+    <!-- Add more questions -->
+    <div class="question">
+      <p>8. Do you feel frustrated or embarrassed due to stammering?</p>
+      <input type="radio" name="q8" value="yes"> Yes<br>
+      <input type="radio" name="q8" value="no"> No<br>
+    </div>
+    <!-- Add more questions -->
+    <div class="question">
+      <p>9. Do you face difficulties when speaking in public?</p>
+      <input type="radio" name="q9" value="yes"> Yes<br>
+      <input type="radio" name="q9" value="no"> No<br>
+    </div>
+    <!-- Add more questions -->
+    <div class="question">
+      <p>10. Do you feel anxious about speaking?</p>
+      <input type="radio" name="q10" value="yes"> Yes<br>
+      <input type="radio" name="q10" value="no"> No<br>
+    </div>
+
+    <button type="button" id="submitButton">Submit</button>
+  </form>
+
+  <div class="result-message" id="resultsPage" style="display: none;">
+    <h2>Assessment Results</h2>
+    <p id="resultText"></p>
+    <button type="button" id="homeButton">Home</button>
+  </div>
+
+  <script>
+    const questions = document.querySelectorAll('.question');
+    let currentQuestion = 0;
+
+    function showQuestion(index) {
+      questions.forEach((question, i) => {
+        if (i === index) {
+          question.style.display = 'block';
+        } else {
+          question.style.display = 'none';
+        }
+      });
+    }
+
+    function showNextQuestion() {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+      } else {
+        generateResults();
+      }
+    }
+
+    showQuestion(currentQuestion);
+
+    document.getElementById('submitButton').addEventListener('click', function() {
+      const checkedInput = document.querySelector(`input[name=q${currentQuestion + 1}]:checked`);
+      if (checkedInput || currentQuestion === questions.length - 1) {
+        showNextQuestion();
+      } else {
+        alert("Please select an option.");
+      }
+    });
+
+    function generateResults() {
+      const yesAnswers = document.querySelectorAll('input[type="radio"][value="yes"]:checked');
+      const numYesAnswers = yesAnswers.length;
+
+      const resultText = document.getElementById('resultText');
+      if (numYesAnswers <= 3) {
+        resultText.innerText = "Your answers suggest minimal concerns with stammering. Consider practicing speech exercises for improvement.";
+      } else if (numYesAnswers <= 6) {
+        resultText.innerText = "Your responses indicate moderate concerns with stammering. Seeking professional guidance might be beneficial.";
+      } else {
+        resultText.innerText = "Your answers indicate significant concerns with stammering. It's advisable to consult a speech therapist for assistance.";
+      }
+
+      document.getElementById('assessmentForm').style.display = 'none';
+      document.getElementById('resultsPage').style.display = 'block';
+
+      document.getElementById('homeButton').addEventListener('click', function() {
+        window.location.href = 'dashboard.html'; 
+      });
+    }
+  </script>
+</body>
+</html>

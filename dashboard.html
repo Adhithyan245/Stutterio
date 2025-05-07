@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stammering Awareness & Lessons</title>
+  <style>
+    /* Reset and General Styling */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #3494e6, #ec6ead);
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: #3498db;
+      color: #fff;
+      text-align: center;
+      padding: 2em 0;
+    }
+
+    .logo {
+      max-width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .header-cta {
+      margin-top: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #2980b9;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin-right: 10px;
+    }
+
+    .cta-button:hover {
+      background-color: #1c638e;
+    }
+
+    /* Main Content Styles */
+    h1, h2 {
+      margin-bottom: 15px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 15px;
+    }
+
+    ul li {
+      margin-bottom: 5px;
+    }
+
+    .lesson {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .lesson img {
+      width: 150px;
+      height: auto;
+      margin-right: 20px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
+    .file-upload {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .file-upload label {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #2980b9;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .file-upload label:hover {
+      background-color: #1c638e;
+    }
+
+    .result-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .result-text {
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* Feature Section Styles */
+    .feature-section {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 50px;
+    }
+
+    .feature {
+      flex: 1;
+      text-align: center;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      margin: 0 10px;
+    }
+
+    .feature:hover {
+      transform: translateY(-10px);
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: #666;
+    }
+
+    .feature img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="images/logo.png" alt="Company Logo" class="logo">
+    <h1>Stammering Awareness & Lessons</h1>
+    <p>Discover and Learn Techniques to Improve</p>
+
+    <div class="header-cta">
+      <a href="login.html" class="cta-button">Login</a>
+      <a href="signup.html" class="cta-button">Sign Up</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Understanding Stammering</h2>
+    <p>Stammering, also known as stuttering, affects speech fluency. It's important to identify if you experience speech disruptions. Take our quick assessment to learn more.</p>
+
+    <a href="assessment.html" class="cta-button">Take Assessment</a>
+
+    <h2>Overcoming Stammering</h2>
+    <p>Our website provides comprehensive lessons and resources to help individuals overcome stammering and improve speech fluency. Here are some key features:</p>
+    
+    <div class="feature-section">
+      <div class="feature">
+        <img src="images/speech_therapy.jpg" alt="Speech Therapy">
+        <h3>Personalized Speech Therapy</h3>
+        <p>Receive personalized speech therapy sessions tailored to your specific needs and goals.</p>
+      </div>
+      <div class="feature">
+        <img src="images/breathing_exercises.jpg" alt="Breathing Exercises">
+        <h3>Breathing Exercises</h3>
+        <p>Learn effective breathing exercises to enhance speech fluency and control.</p>
+      </div>
+      <div class="feature">
+        <img src="images/confidence_building.jpg" alt="Confidence Building">
+        <h3>Confidence Building Techniques</h3>
+        <p>Explore techniques to boost confidence and overcome anxiety associated with stammering.</p>
+      </div>
+    </div>
+
+    <div class="file-upload">
+      <h2>Upload Your Voice Message</h2>
+      <form id="uploadForm">
+        <label for="voiceFile">Choose File</label>
+        <input type="file" id="voiceFile" name="voiceFile" accept="audio/*">
+        <input type="submit" value="Upload">
+      </form>
+    </div>
+
+    <div class="result-section" id="resultSection" style="display: none;">
+      <h2>API Result:</h2>
+      <p class="result-text" id="apiResult"></p>
+    </div>
+
+    <p>Enroll in our lessons to get personalized guidance and exercises to enhance your speech fluency.</p>
+
+    <a href="lesson.html" class="cta-button">Explore Lessons</a>
+  </div>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const file = document.getElementById('voiceFile').files[0];
+      if (file) {
+        const mockApiResponse = { result: 'File uploaded successfully.' };
+
+        document.getElementById('resultSection').style.display = 'block';
+        document.getElementById('apiResult').textContent = JSON.stringify(mockApiResponse, null, 2);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    /* General styling */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #3494e6, #ec6ead);
+      overflow: hidden;
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative; /* Ensure z-index works properly */
+      z-index: 2; /* Make sure it's above particles */
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #3494e6;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2775b8;
+    }
+
+    .error-message {
+      color: red;
+      text-align: center;
+      display: none;
+    }
+
+    .register-message {
+      color: #333;
+      margin-top: 15px;
+    }
+
+    /* Particle container */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Make sure it's below other content */
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <div class="login-container">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <input type="text" name="usernameOrEmail" placeholder="Username or Email">
+      <input type="password" name="password" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
+    <p class="error-message" id="errorMessage">Incorrect username or password</p>
+    <p class="register-message">Not registered? <a href="signup.html">Sign up</a></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS('particles-js',
+      {
+        "particles": {
+          "number": {"value": 50, "density": {"enable": true, "value_area": 800}},
+          "color": {"value": "#ffffff"},
+          "shape": {
+            "type": "circle",
+            "stroke": {"width": 0, "color": "#000000"},
+            "polygon": {"nb_sides": 5}
+          },
+          "opacity": {"value": 0.5, "random": true},
+          "size": {"value": 3, "random": true},
+          "line_linked": {"enable": false},
+          "move": {"enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false}
+        },
+        "interactivity": {"detect_on": "canvas", "events": {"onhover": {"enable": false}, "onclick": {"enable": false}, "resize": true}, "modes": {"grab": {"distance": 400, "line_linked": {"opacity": 1}}}}
+      }
+    );
+
+    const form = document.getElementById('loginForm');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const usernameOrEmail = form.elements.usernameOrEmail.value;
+      const password = form.elements.password.value;
+
+      // Perform authentication (mocked example)
+      // Simulating login using username or email
+      if ((usernameOrEmail === 'user' || usernameOrEmail === 'user@example.com') && password === 'password') {
+        // Redirect to a dashboard or another page upon successful login
+        window.location.href = 'dashboard.html';
+      } else {
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
